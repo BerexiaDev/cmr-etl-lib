@@ -4,11 +4,13 @@ from typing import Union
 from flask import Request
 
 IGNORE_PATHS = [
-    "/api/v1/auth/login",
-    "/api/v1/auth/register",
-    "/api/v1/auth/logout",
-    "/api/v1/auth/refresh",
-    "/api/v1/auth/forgot-password",
+    "/api/auth/login",
+    "/api/auth/register",
+    "/api/auth/logout",
+    "/api/auth/refresh",
+    "/api/auth/forgot-password",
+    "/api/auth/reset-password",
+    "/api/audit-trails",
 ]
 
 def get_json_body(req: Request) -> Union[list, dict]:
