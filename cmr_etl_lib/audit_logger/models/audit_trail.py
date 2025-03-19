@@ -2,7 +2,7 @@ from cmr_etl_lib.document import Document
 
 
 class AuditTrail(Document):
-    __TABLE__ = "audit"
+    __TABLE__ = "audit_trails"
 
     _id = None
     collection = None
