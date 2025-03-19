@@ -1,5 +1,5 @@
 from flask import g
-from esg_lib.auth.user import User
+from cmr_etl_lib.auth.user import User
 
 
 class AuthHelper:

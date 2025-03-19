@@ -2,9 +2,9 @@ from flask_restx import Resource
 from flask import request
 
 
-from esg_lib.audit_logger.service.audit_service import get_audit_logs_paginated
-from esg_lib.dto import AuditDto
-from esg_lib.reqparse import get_default_paginated_request_parse
+from cmr_etl_lib.audit_logger.service.audit_service import get_audit_logs_paginated
+from cmr_etl_lib.dto import AuditDto
+from cmr_etl_lib.reqparse import get_default_paginated_request_parse
 
 api = AuditDto.api
 audit_pagination = AuditDto.audit_pagination

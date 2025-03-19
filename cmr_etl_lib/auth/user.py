@@ -1,4 +1,4 @@
-from esg_lib.document import Document
+from cmr_etl_lib.document import Document
 
 
 class User(Document):

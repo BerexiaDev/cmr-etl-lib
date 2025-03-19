@@ -1,7 +1,7 @@
-from esg_lib.audit_logger.models.AuditTrail import AuditTrail
-from esg_lib.decorators import catch_exceptions
-from esg_lib.paginator import Paginator
-from esg_lib.filters import build_filters
+from cmr_etl_lib.audit_logger.models.AuditTrail import AuditTrail
+from cmr_etl_lib.decorators import catch_exceptions
+from cmr_etl_lib.paginator import Paginator
+from cmr_etl_lib.filters import build_filters
 
 
 @catch_exceptions

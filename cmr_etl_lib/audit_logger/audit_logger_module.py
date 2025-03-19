@@ -1,9 +1,9 @@
 from datetime import datetime
 from flask import Blueprint, request, g
 
-from esg_lib.audit_logger.models.audit_trail import AuditTrail
-from esg_lib.audit_logger.utils import get_json_body, get_only_changed_values_and_id, get_action, get_primary_key_value
-from esg_lib.audit_logger.utils import IGNORE_PATHS
+from cmr_etl_lib.audit_logger.models.audit_trail import AuditTrail
+from cmr_etl_lib.audit_logger.utils import get_json_body, get_only_changed_values_and_id, get_action, get_primary_key_value
+from cmr_etl_lib.audit_logger.utils import IGNORE_PATHS
 
 
 SUCCESS_STATUS_CODES = [200, 201, 204]
