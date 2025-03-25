@@ -10,6 +10,7 @@ setup(
         "inject==5.0.0",
         "python-dotenv==0.21.1",
         "PyJWT==1.5.3",
+        "loguru==0.6.0",
     ],
     author='Berexia dev',
     author_email='berexiadev@berexia.com',
