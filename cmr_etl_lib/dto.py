@@ -46,7 +46,8 @@ class AuditDto:
     user_info = api.model(
         "User",
         {
-            "fullname": fields.String(required=True),
+            "id": fields.String(),
+            "full_name": fields.String(required=True),
             "email": fields.String(required=True),
         },
     )

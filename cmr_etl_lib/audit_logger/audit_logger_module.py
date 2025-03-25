@@ -4,22 +4,24 @@ from flask import Blueprint, request, g
 from cmr_etl_lib.audit_logger.models.audit_trail import AuditTrail
 from cmr_etl_lib.audit_logger.utils import get_json_body, get_only_changed_values_and_id, get_action, get_primary_key_value
 from cmr_etl_lib.audit_logger.utils import IGNORE_PATHS
+from cmr_etl_lib.auth.auth_helper import AuthHelper
 
 
 SUCCESS_STATUS_CODES = [200, 201, 204]
 DEFAULT_LOG_METHODS = ["POST", "PUT", "DELETE", "PATCH"]
 PRIMARY_KEY_MAPPING = {
-    "target_settings": "action",
-    "attachments": "filename",
-    "bilan_carbon": "campaign_name",
-    "bilan_factor": "type_emission.large_name",
-    "form_checks": "technical_check",
-    "notifications": "content",
     "users": "email",
-    "ref_sectors": "label",
-    "entity_domaines": "h1"
+    "connectors": "name",
+    "refrences":"name",
+    "processes": "name",
+    "rules": "name",
+    # TODO - Add remediation plan
 }
-AUDIT_COLLECTION_NAME = "audit"
+AUDIT_COLLECTION_NAME = "audit_trails"
+
+
+
+        
 
 
 class AuditBlueprint(Blueprint):
@@ -92,12 +94,14 @@ class AuditBlueprint(Blueprint):
 
 
             action = get_action(request.method, response.status_code)
-            self.create_log(action, endpoint, new_value=new_data, old_value=old_data)
+            user_info = AuthHelper.get_logged_in_user(request.headers.get('Authorization'))
+            print("user_info =>", user_info)
+            self.create_log(action, endpoint, new_value=new_data, old_value=old_data, user_info=user_info)
 
         return response
 
-    def create_log(self, action: str, endpoint: str, new_value=None, old_value=None):
-        user_info = g.auth_user if g.get("auth_user") else {"email": "dummy@email.com", "fullname": "Dummy Name"}
+    def create_log(self, action: str, endpoint: str, new_value=None, old_value=None, user_info=None):
+        user_info = user_info if user_info else {"email": "system@email.com", "fullname": "System User"}
 
         audit_log = {
             "collection": g.get("table_name"),
