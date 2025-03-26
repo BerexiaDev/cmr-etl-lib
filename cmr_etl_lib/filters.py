@@ -1,15 +1,5 @@
 import re
-from cmr_etl_lib.document import Document
-
-collections = {
-    "axe": "axes",
-    "engagement": "engagements",
-    "objective": "objectives",
-    "entity": "entities",
-    "entities": "entities",
-    "group": "groups",
-}
-
+from datetime import datetime
 
 def get_ids_by_name(collection, name_field, id_field, name_value):
     """
@@ -22,11 +12,6 @@ def get_ids_by_name(collection, name_field, id_field, name_value):
 
     if results:
         return [r[id_field] for r in results]
-
-
-def get_collection(field_code):
-    collection_name = collections.get(field_code, field_code)
-    return Document.get_collection(collection_name)
 
 
 def build_filters(filters):
@@ -57,25 +42,9 @@ def build_filters(filters):
         if value != 0 and not value:  # Allow 0 as a valid value
             raise ValueError("No value provided.")
 
-        # Handle cases where the search is done by name, but the ID is stored in the database
-        if table_name in [
-            "forms",
-            "projects",
-            "permanent_actions",
-            "highlighted_actions",
-            "campaigns",
-            "carbon_campaigns",
-        ] and field_code in [
-            "axe",
-            "engagement",
-            "objective",
-            "entity",
-            "group",
-            "entities",
-        ]:
-            collection = get_collection(field_code)
-            ids_value = get_ids_by_name(collection, "name", "_id", value)
-            mongo_query[field_code] = {"$in": ids_value}
+        # Handle audit_trails with user fullname or email search
+        if table_name == "audit-trails" and field_code in ["full_name", "email"]:
+            mongo_query[f"user.{field_code}"] = _build_query_for_operator(operator, value)
             continue
 
         if table_name == "users" and field_code == "has_backup":
@@ -89,11 +58,13 @@ def build_filters(filters):
                 raise ValueError(
                     f"Value for '{operator}' operator must be a date string."
                 )
+                
+            value_datetime = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%fZ")
 
             if operator == "BEFORE":
-                mongo_query[field_code] = {"$lt": value}
+                mongo_query[field_code] = {"$lt": value_datetime}
             elif operator == "AFTER":
-                mongo_query[field_code] = {"$gt": value}
+                mongo_query[field_code] = {"$gt": value_datetime}
 
         elif operator == "EQUALS":
             mongo_query[field_code] = value
@@ -114,3 +85,22 @@ def build_filters(filters):
             raise ValueError(f"Unsupported operator: {operator}")
 
     return mongo_query
+
+
+def _build_query_for_operator(operator, value):
+    """
+    Helper function to build query based on operator for user fields in audit_trails
+    """
+    if operator == "EQUALS":
+        return value
+    elif operator == "NOT EQUALS":
+        return {"$ne": value}
+    elif operator == "CONTAINS":
+        if not isinstance(value, str):
+            raise ValueError("Value for 'CONTAINS' operator must be a string.")
+        return {"$regex": value, "$options": "i"}
+    elif operator == "IN":
+        regex_query = [re.compile(v, re.IGNORECASE) for v in value]
+        return {"$in": regex_query}
+    else:
+        raise ValueError(f"Unsupported operator for user fields: {operator}")
