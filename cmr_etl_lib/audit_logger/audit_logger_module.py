@@ -96,7 +96,6 @@ class AuditBlueprint(Blueprint):
 
             action = get_action(request.method, response.status_code)
             user_info = AuthHelper.get_logged_in_user(request.headers.get('Authorization'))
-            print("user_info =>", user_info)
             self.create_log(action, endpoint, new_value=new_data, old_value=old_data, user_info=user_info)
 
         return response
