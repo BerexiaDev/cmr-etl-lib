@@ -96,15 +96,15 @@ class AuditBlueprint(Blueprint):
 
             action = get_action(request.method, response.status_code)
             user_info = AuthHelper.get_logged_in_user(request.headers.get('Authorization'))
-            self.create_log(action, endpoint, new_value=new_data, old_value=old_data, user_info=user_info)
+            self.create_log(action, table_name, endpoint, new_value=new_data, old_value=old_data, user_info=user_info)
 
         return response
 
-    def create_log(self, action: str, endpoint: str, new_value=None, old_value=None, user_info=None):
+    def create_log(self, action: str, table_name: str, endpoint: str, new_value=None, old_value=None, user_info=None):
         user_info = user_info if user_info else {"email": "system@email.com", "fullname": "System User"}
 
         audit_log = {
-            "collection": g.get("table_name"),
+            "collection": table_name,
             "action": action,
             "endpoint": endpoint,
             "user": user_info,
