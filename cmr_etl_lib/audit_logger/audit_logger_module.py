@@ -15,7 +15,8 @@ PRIMARY_KEY_MAPPING = {
     "refrences":"name",
     "processes": "name",
     "rules": "name",
-    # TODO - Add remediation plan
+    "issues": "name",
+    "redemiation_actions": "description"
 }
 AUDIT_COLLECTION_NAME = "audit_trails"
 
