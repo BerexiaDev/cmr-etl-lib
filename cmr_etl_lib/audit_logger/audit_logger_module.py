@@ -107,7 +107,11 @@ class AuditBlueprint(Blueprint):
             "collection": table_name,
             "action": action,
             "endpoint": endpoint,
-            "user": user_info,
+            "user": {
+              "id": user_info.get("id"),
+              "email": user_info.get("email"),
+              "full_name": user_info.get("full_name")
+            },
             "old_value": old_value,
             "new_value": new_value,
             "created_on": datetime.utcnow()
