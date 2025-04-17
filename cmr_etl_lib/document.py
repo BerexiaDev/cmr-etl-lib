@@ -85,3 +85,14 @@ class Document:
         # for k, v in data.items():
         #     self.__setattr__(k, v)
         # return self
+        
+    @classmethod
+    def count(cls, query=None):
+        """
+        Count documents matching the query.
+        
+        :param query: dict, The filter query (default: {}).
+        :return: int, Number of matching documents.
+        """
+        query = query or {}
+        return cls().db().count_documents(query)

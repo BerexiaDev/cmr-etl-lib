@@ -17,13 +17,14 @@ def get_audit_logs_paginated(args, data):
     collection = AuditTrail().db()
     skip = max((page - 1) * per_page, 0)
     
-    if query: 
-        skip = 0
-        per_page = 10
     
     if "action" not in query:
         query["action"] = {"$ne": "RETRIEVE"}
     
+    total = AuditTrail.count(query)
+    if skip >= total:
+        skip = max(total - per_page, 0)
+            
     total_items = collection.aggregate(
         [
             {"$match": query},
@@ -34,6 +35,5 @@ def get_audit_logs_paginated(args, data):
     )
 
     data = [AuditTrail(**entity) for entity in total_items]
-    total = collection.find(query, {"_id": 1}).count()
 
     return Paginator(data, page, per_page, total)
