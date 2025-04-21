@@ -8,6 +8,8 @@ from cmr_etl_lib.filters import build_filters
 def get_audit_logs_paginated(args, data):
     query = build_filters(data.get("filters", []))
 
+    if "action" not in query:
+        query["action"] = {"$ne": "RETRIEVE"}
 
     page = args.get("page")
     per_page = args.get("size")
