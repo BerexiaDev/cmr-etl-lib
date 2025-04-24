@@ -1,6 +1,5 @@
 from cmr_etl_lib.auth.user import User
 from loguru import logger
-import os
 import jwt
 
 class AuthHelper:

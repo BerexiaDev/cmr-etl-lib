@@ -1,6 +1,6 @@
 from functools import wraps
 from flask import request
-from auth_helper import get_logged_in_user
+from cmr_etl_lib.auth.auth_helper import get_logged_in_user
 
 ROUTES_TO_SKIP = [
     "/auth/login",
