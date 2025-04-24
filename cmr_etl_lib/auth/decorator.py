@@ -1,6 +1,6 @@
 from functools import wraps
 from flask import request
-from cmr_etl_lib.auth.auth_helper import get_logged_in_user
+from cmr_etl_lib.auth.auth_helper import AuthHelper
 
 ROUTES_TO_SKIP = [
     "/auth/login",
@@ -23,7 +23,7 @@ def token_required(roles=None):
             if 'Authorization' not in request.headers:
                     return {"message": "Token is missing"}, 401
             # Fetch logged-in user data
-            data, status = get_logged_in_user(request)
+            data, status = AuthHelper.get_logged_in_user(request)
             # Log the URL and token
             if status != 200:
                 return {"message": "Invalid token"}, 401
