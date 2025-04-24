@@ -9,19 +9,25 @@ ROUTES_TO_SKIP = [
     "/auth/refresh",
     "/auth/forgot_password",
     "/auth/reset-password",
+    
+    # health check
+    "/auth/halth",
+    "/api/health",
 ]
 
 
-def token_required(roles=None):
-    def decorator(f):
-        @wraps(f)
-        def decorated_function(*args, **kwargs):
-            
-            if request.path in ROUTES_TO_SKIP or "swagger" in request.path:
-                return f(*args, **kwargs)
+def token_required(f):
+    @wraps(f)
+    def decorator(*args, **kwargs):
+        roles = None
+        
+        if request.path in ROUTES_TO_SKIP or "swagger" in request.path:
+            return f(*args, **kwargs)
 
+        try:
             if 'Authorization' not in request.headers:
-                    return {"message": "Token is missing"}, 401
+                return {"message": "Token is missing"}, 401
+            
             # Fetch logged-in user data
             data, status = AuthHelper.get_logged_in_user(request)
             # Log the URL and token
@@ -38,8 +44,11 @@ def token_required(roles=None):
 
             user_role = token.get('role')
             if user_role not in roles:
-                    return {"message": "Permission denied"}, 403
+                return {"message": "Permission denied"}, 403
                 
             return f(*args, **kwargs)
-        return decorated_function
+        
+        except Exception as e:
+            return {"message": f"Authentication error: {str(e)}"}, 401
+            
     return decorator
