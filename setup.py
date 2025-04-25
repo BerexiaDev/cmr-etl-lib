@@ -11,6 +11,7 @@ setup(
         "python-dotenv==0.21.1",
         "PyJWT==1.5.3",
         "loguru==0.6.0",
+        "Flask-Bcrypt==1.0.1",
     ],
     author='Berexia dev',
     author_email='berexiadev@berexia.com',

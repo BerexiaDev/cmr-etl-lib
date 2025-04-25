@@ -1,7 +1,7 @@
 from cmr_etl_lib.auth.user import User
 from loguru import logger
 import jwt
-
+import os
 class AuthHelper:
     def get_logged_in_user(new_request):
         # get the auth token
@@ -46,6 +46,7 @@ def decode_auth_token(auth_token):
     :return: integer|string
     """
     try:
+        key = os.getenv("SECRET_KEY")
         payload = jwt.decode(auth_token, key, algorithms=['HS256'])
         return {"status": "success", "token": payload["sub"]}
     except jwt.ExpiredSignatureError:

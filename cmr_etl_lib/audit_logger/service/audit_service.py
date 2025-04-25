@@ -37,5 +37,4 @@ def get_audit_logs_paginated(args, data):
     )
 
     data = [AuditTrail(**entity) for entity in total_items]
-
     return Paginator(data, page, per_page, total)
