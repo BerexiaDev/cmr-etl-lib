@@ -4,8 +4,8 @@ from flask import Blueprint, request, g
 from cmr_etl_lib.audit_logger.models.audit_trail import AuditTrail
 from cmr_etl_lib.audit_logger.utils import get_json_body, get_only_changed_values_and_id, get_action, get_primary_key_value
 from cmr_etl_lib.audit_logger.utils import IGNORE_PATHS
-from cmr_etl_lib.auth.auth_helper import AuthHelper
-
+from loguru import logger
+from cmr_etl_lib.auth.user import User
 
 SUCCESS_STATUS_CODES = [200, 201, 204]
 DEFAULT_LOG_METHODS = ["POST", "PUT", "DELETE", "PATCH"]
@@ -20,9 +20,6 @@ PRIMARY_KEY_MAPPING = {
 }
 AUDIT_COLLECTION_NAME = "audit_trails"
 
-
-
-        
 
 
 class AuditBlueprint(Blueprint):
@@ -42,8 +39,8 @@ class AuditBlueprint(Blueprint):
     def after_data_request(self, response):
         table_name = g.get("table_name")
         endpoint = request.path
-
-        if not table_name or table_name == AUDIT_COLLECTION_NAME or endpoint in IGNORE_PATHS or "swagger" in endpoint:
+        
+        if not table_name or table_name == AUDIT_COLLECTION_NAME or endpoint in IGNORE_PATHS or "swagger" in endpoint or request.method == "OPTIONS":
             return response
 
         primary_key = PRIMARY_KEY_MAPPING.get(table_name, "name")
@@ -95,7 +92,10 @@ class AuditBlueprint(Blueprint):
 
 
             action = get_action(request.method, response.status_code)
-            user_info = AuthHelper.get_logged_in_user(request.headers.get('Authorization'))
+            
+            logger.info(f"FROM  AUDit , {request.headers.get('Authorization')}")
+            
+            user_info = User.decode_auth_token(request.headers.get('Authorization'))
             self.create_log(action, table_name, endpoint, new_value=new_data, old_value=old_data, user_info=user_info)
 
         return response
