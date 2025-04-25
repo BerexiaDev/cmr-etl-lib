@@ -92,11 +92,10 @@ class AuditBlueprint(Blueprint):
 
 
             action = get_action(request.method, response.status_code)
-            
-            logger.info(f"FROM  AUDit , {request.headers.get('Authorization')}")
-            
-            user_info = User.decode_auth_token(request.headers.get('Authorization'))
-            self.create_log(action, table_name, endpoint, new_value=new_data, old_value=old_data, user_info=user_info)
+            auth_token = request.headers.get('Authorization').split(" ")[1]
+            decode_resp = User.decode_auth_token(auth_token)
+            user = User().load({'_id':decode_resp.get("token")})
+            self.create_log(action, table_name, endpoint, new_value=new_data, old_value=old_data, user_info=user.to_dict())
 
         return response
 
