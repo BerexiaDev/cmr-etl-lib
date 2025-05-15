@@ -13,6 +13,7 @@ ROUTES_TO_SKIP = [
     # health check
     "/auth/halth",
     "/api/health",
+    "/api/sync",
 ]
 
 
