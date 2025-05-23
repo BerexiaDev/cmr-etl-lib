@@ -11,8 +11,9 @@ ROUTES_TO_SKIP = [
     "/auth/reset-password",
     
     # health check
-    "/auth/halth",
+    "/auth/health",
     "/api/health",
+    "/sync/health",
     "/api/sync",
 ]
 
