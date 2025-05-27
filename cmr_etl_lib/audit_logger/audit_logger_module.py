@@ -17,7 +17,8 @@ PRIMARY_KEY_MAPPING = {
     "rules": "name",
     "issues": "name",
     "redemiation_actions": "description",
-    "populations": "name"
+    "populations": "name",
+    "domains": "name"
 }
 AUDIT_COLLECTION_NAME = "audit_trails"
 
