@@ -1,6 +1,6 @@
 from typing import List, Dict
 
-from app.main.utils.enums import AppModuleEnum, UserRoleEnum, UserActionEnum
+from cmr_etl_lib.enums import AppModuleEnum, UserActionEnum, UserRoleEnum
 
 PERMISSION_MATRIX: Dict[AppModuleEnum, Dict[UserActionEnum, List[UserRoleEnum]]] = {
     AppModuleEnum.USERS.value: {
