@@ -20,11 +20,9 @@ ROUTES_TO_SKIP = [
 ]
 
 
-def token_required(f):
+def token_required(roles = []):
     @wraps(f)
     def decorator(*args, **kwargs):
-        roles = None
-        
         # Skip authentication for specified routes, swagger, and OPTIONS requests
         if request.path in ROUTES_TO_SKIP or "swagger" in request.path or request.method == "OPTIONS":
             return f(*args, **kwargs)
