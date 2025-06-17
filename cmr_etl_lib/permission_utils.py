@@ -37,6 +37,20 @@ PERMISSION_MATRIX: Dict[AppModuleEnum, Dict[UserActionEnum, List[UserRoleEnum]]]
             UserRoleEnum.MANAGEMENT_CONTROL.value
         ],
     },
+    AppModuleEnum.DATA_CLEANING.value: {
+        UserActionEnum.WRITE.value: [
+            UserRoleEnum.ADMIN.value,
+            UserRoleEnum.DATA_OWNER.value,
+        ],
+        UserActionEnum.READ.value: [
+            UserRoleEnum.ADMIN.value,
+            UserRoleEnum.DATA_OWNER.value,
+            UserRoleEnum.DATA_STEWARD.value,
+            UserRoleEnum.SPONSOR.value,
+            UserRoleEnum.PERMANENT_CONTROL.value,
+            UserRoleEnum.MANAGEMENT_CONTROL.value
+        ],
+    },
     AppModuleEnum.DOMAINS.value: {
         UserActionEnum.WRITE.value: [
             UserRoleEnum.ADMIN.value,

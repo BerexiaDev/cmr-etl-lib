@@ -19,6 +19,7 @@ class AppModuleEnum(Enum):
     ISSUE_TRACKER = 'ISSUE_TRACKER'
     REMEDIATION_ACTIONS = 'REMEDIATION_ACTIONS'
     AUDIT_LOG = 'AUDIT_LOG'
+    DATA_CLEANING = 'DATA_CLEANING'
 
 class UserActionEnum(Enum):
     READ = 'READ'
