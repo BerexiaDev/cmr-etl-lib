@@ -13,8 +13,7 @@ PERMISSION_MATRIX: Dict[AppModuleEnum, Dict[UserActionEnum, List[UserRoleEnum]]]
     },
     AppModuleEnum.REFERENCES.value: {
         UserActionEnum.WRITE.value: [
-            UserRoleEnum.ADMIN.value,
-            # UserRoleEnum.DATA_OWNER.value
+            UserRoleEnum.ADMIN.value
         ],
         UserActionEnum.READ.value: [
             UserRoleEnum.ADMIN.value,
@@ -27,9 +26,7 @@ PERMISSION_MATRIX: Dict[AppModuleEnum, Dict[UserActionEnum, List[UserRoleEnum]]]
     },
     AppModuleEnum.POPULATIONS.value: {
         UserActionEnum.WRITE.value: [
-            UserRoleEnum.ADMIN.value,
-            # UserRoleEnum.DATA_OWNER.value,
-            # UserRoleEnum.PERMANENT_CONTROL.value
+            UserRoleEnum.ADMIN.value
         ],
         UserActionEnum.READ.value: [
             UserRoleEnum.ADMIN.value,
