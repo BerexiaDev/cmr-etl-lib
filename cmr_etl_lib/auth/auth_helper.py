@@ -17,8 +17,8 @@ class AuthHelper:
                         'email': user.email,
                         'full_name': user.full_name,
                         'is_active': user.is_active,
-                        'references': user.references,
-                        'process': user.process,
+                        'references_ids': user.references_ids,
+                        'populations_ids': user.populations_ids,
                         'created_on': str(user.created_on),
                         'role': user.role
                     }
