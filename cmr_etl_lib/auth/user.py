@@ -17,11 +17,12 @@ class User(Document):
     modified_on = None
     admin = None
     role = None
-    references = None
-    is_active= None
+    is_active = None
     is_new_user = None
-    references = None
-    process = None
+    domains_ids = []
+    sub_domains_ids = []
+    references_ids = []
+    populations_ids = []
     
 
     @property
