@@ -20,7 +20,7 @@ ROUTES_TO_SKIP = [
 ]
 
 
-def token_required(roles = []):
+def token_required(roles=None):
     def decorator(f):
         @wraps(f)
         def decorated_function(*args, **kwargs):
@@ -44,7 +44,7 @@ def token_required(roles = []):
                     return {"message": "Token is missing"}, 401
 
                 # Check if the token has the required role
-                if roles is None:
+                if not roles:
                     return f(*args, **kwargs)
 
                 user_role = token.get('role')
