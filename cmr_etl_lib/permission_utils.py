@@ -133,6 +133,10 @@ PERMISSION_MATRIX: Dict[AppModuleEnum, Dict[UserActionEnum, List[UserRoleEnum]]]
     AppModuleEnum.AUDIT_LOG.value: {
         UserActionEnum.WRITE.value: [UserRoleEnum.ADMIN.value],
         UserActionEnum.READ.value: [UserRoleEnum.ADMIN.value],
+    },
+    AppModuleEnum.DATAMART_LOGS.value: {
+        UserActionEnum.WRITE.value: [UserRoleEnum.ADMIN.value],
+        UserActionEnum.READ.value: [UserRoleEnum.ADMIN.value],
     }
 }
 
