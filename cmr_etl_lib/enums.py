@@ -21,6 +21,7 @@ class AppModuleEnum(Enum):
     AUDIT_LOG = 'AUDIT_LOG'
     DATA_CLEANING = 'DATA_CLEANING'
     DATAMART_LOGS = 'DATAMART_LOGS'
+    DATA_ENGINEERING = 'DATA_ENGINEERING'
 
 class UserActionEnum(Enum):
     READ = 'READ'
