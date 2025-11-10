@@ -82,7 +82,6 @@ PERMISSION_MATRIX: Dict[AppModuleEnum, Dict[UserActionEnum, List[UserRoleEnum]]]
         UserActionEnum.WRITE.value: [
             UserRoleEnum.ADMIN.value,
             UserRoleEnum.DATA_OWNER.value,
-            UserRoleEnum.DATA_STEWARD.value,
             UserRoleEnum.SPONSOR.value,
             UserRoleEnum.PERMANENT_CONTROL.value
         ],
