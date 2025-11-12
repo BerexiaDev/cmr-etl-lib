@@ -156,6 +156,7 @@ class QueuedJobAction(Enum):
     FULL_REFRESH   = "FULL_REFRESH"
     FULL_SYNC      = "FULL_SYNC"
     PARTIAL_SYNC   = "PARTIAL_SYNC"
+    LOG_TABLE   = "LOG_TABLE"
     
 class TableType(Enum):
     CLEANED_TABLE = "CLEANED TABLE"
