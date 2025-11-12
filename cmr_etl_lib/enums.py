@@ -155,7 +155,7 @@ class QueuedJobAction(Enum):
     FULL_REBUILD   = "FULL_REBUILD"
     FULL_REFRESH   = "FULL_REFRESH"
     FULL_SYNC      = "FULL_SYNC"
-    PARTIAL_SYNC   = "PARTIAL_SYNC"
+    INCREMENTAL   = "INCREMENTAL"
     LOG_TABLE   = "LOG_TABLE"
     
 class TableType(Enum):
