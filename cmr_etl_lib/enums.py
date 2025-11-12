@@ -93,25 +93,25 @@ class HavingConditionType(Enum):
 
 
 class DateUnit(Enum):
-  Day = 'DAY'
-  Month = 'MONTH'
-  Year = 'YEAR'
+    Day = 'DAY'
+    Month = 'MONTH'
+    Year = 'YEAR'
 
 
 class ColumnType(Enum):
-  String = 'string'
-  Number = 'number'
-  Date = 'Date'
-  Boolean = 'boolean'
-  Datetime = 'Datetime'
-  List = 'list'
-  Set = 'set'
-  MultiSet = 'multiset'
+    String = 'string'
+    Number = 'number'
+    Date = 'Date'
+    Boolean = 'boolean'
+    Datetime = 'Datetime'
+    List = 'list'
+    Set = 'set'
+    MultiSet = 'multiset'
 
 
 class ComparisonType(Enum):
-  Value = 'VALUE'   # Compare with a fixed value
-  Column = 'COLUMN'  # Compare with another column
+    Value = 'VALUE'   # Compare with a fixed value
+    Column = 'COLUMN'  # Compare with another column
 
 
 class RuleSeverityCoefficient(Enum):

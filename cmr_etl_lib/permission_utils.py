@@ -41,6 +41,11 @@ PERMISSION_MATRIX: Dict[AppModuleEnum, Dict[UserActionEnum, List[UserRoleEnum]]]
         ],
         UserActionEnum.READ.value: [
             UserRoleEnum.ADMIN.value,
+            UserRoleEnum.DATA_OWNER.value,
+            UserRoleEnum.DATA_STEWARD.value,
+            UserRoleEnum.SPONSOR.value,
+            UserRoleEnum.PERMANENT_CONTROL.value,
+            UserRoleEnum.MANAGEMENT_CONTROL.value
         ],
     },
     AppModuleEnum.DOMAINS.value: {
@@ -77,7 +82,6 @@ PERMISSION_MATRIX: Dict[AppModuleEnum, Dict[UserActionEnum, List[UserRoleEnum]]]
         UserActionEnum.WRITE.value: [
             UserRoleEnum.ADMIN.value,
             UserRoleEnum.DATA_OWNER.value,
-            UserRoleEnum.DATA_STEWARD.value,
             UserRoleEnum.SPONSOR.value,
             UserRoleEnum.PERMANENT_CONTROL.value
         ],
@@ -131,15 +135,7 @@ PERMISSION_MATRIX: Dict[AppModuleEnum, Dict[UserActionEnum, List[UserRoleEnum]]]
     AppModuleEnum.DATAMART_LOGS.value: {
         UserActionEnum.WRITE.value: [UserRoleEnum.ADMIN.value],
         UserActionEnum.READ.value: [UserRoleEnum.ADMIN.value],
-    },
-    AppModuleEnum.DATA_ENGINEERING.value: {
-        UserActionEnum.WRITE.value: [
-            UserRoleEnum.ADMIN.value,
-        ],
-        UserActionEnum.READ.value: [
-            UserRoleEnum.ADMIN.value,
-        ],
-    },
+    }
 }
 
 
