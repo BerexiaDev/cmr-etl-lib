@@ -157,6 +157,7 @@ class QueuedJobAction(Enum):
     FULL_SYNC      = "FULL_SYNC"
     INCREMENTAL   = "INCREMENTAL"
     LOG_TABLE   = "LOG_TABLE"
+    NO_SYNC   = "NO_SYNC"
     
 class TableType(Enum):
     CLEANED_TABLE = "CLEANED TABLE"
