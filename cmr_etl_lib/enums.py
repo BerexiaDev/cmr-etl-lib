@@ -25,3 +25,4 @@ class AppModuleEnum(Enum):
 class UserActionEnum(Enum):
     READ = 'READ'
     WRITE = 'WRITE'
+    EDIT_RULE_QUERY = 'EDIT_RULE_QUERY'

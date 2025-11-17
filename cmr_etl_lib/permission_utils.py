@@ -85,6 +85,13 @@ PERMISSION_MATRIX: Dict[AppModuleEnum, Dict[UserActionEnum, List[UserRoleEnum]]]
             UserRoleEnum.SPONSOR.value,
             UserRoleEnum.PERMANENT_CONTROL.value
         ],
+        UserActionEnum.EDIT_RULE_QUERY.value: [
+            UserRoleEnum.ADMIN.value,
+            UserRoleEnum.DATA_OWNER.value,
+            UserRoleEnum.SPONSOR.value,
+            UserRoleEnum.PERMANENT_CONTROL.value,
+            UserRoleEnum.DATA_STEWARD.value,
+        ],
         UserActionEnum.READ.value: [
             UserRoleEnum.ADMIN.value,
             UserRoleEnum.DATA_OWNER.value,
