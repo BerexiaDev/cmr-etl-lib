@@ -149,6 +149,7 @@ class SyncStatus(Enum):
     COMPLETED     = "COMPLETED"      # Sync finished successfully
     FAILED        = "FAILED"         # Sync finished with errors
     SCRIPT_ERROR  = "SCRIPT_ERROR"   # Sync aborted due to script error
+    SKIPPED       = "SKIPPED"        # Sync was skipped
     CANCELLED     = "CANCELLED"      # Sync was manually stopped or aborted
     PARTIAL       = "PARTIAL"        # Sync completed partially (some tables/rows failed)
 
