@@ -33,7 +33,9 @@ class UserActionEnum(Enum):
 
 class ExecutionStatus(Enum):
     PENDING = "PENDING"
-    RUNNING = "RUNNING" 
+    RUNNING = "RUNNING"
+    CANCELLING = "CANCELLING"   # User requested cancellation, termination in progress
+    CANCELLED = "CANCELLED"     # Successfully stopped by user
     COMPLETED = "COMPLETED"
     FAILED = "FAILED"
 
